@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HotelReservationProject-impl" default="default" basedir="..">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+    <target name="default" depends="compile,jar"/>
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="dist"/>
+    </target>
+    <target name="compile">
+        <mkdir dir="${build.classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.classes.dir}" includeantruntime="false" source="1.8" target="1.8"/>
+    </target>
+    <target name="jar" depends="compile">
+        <mkdir dir="dist"/>
+        <jar destfile="dist/HotelReservationProject.jar" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="hotelreservation.HotelReservation"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run" depends="jar">
+        <java jar="dist/HotelReservationProject.jar" fork="true"/>
+    </target>
+</project>
